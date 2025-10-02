@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Home, Target, BarChart3, Settings, Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Logo } from './Logo';
 
 interface NavItem {
   name: string;
@@ -25,7 +26,7 @@ export const FloatingSidebar = () => {
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsMobileOpen(!isMobileOpen)}
-        className="md:hidden fixed top-4 left-4 z-50 p-3 rounded-lg bg-card/80 backdrop-blur-lg border border-border hover:bg-card transition-colors"
+        className="md:hidden fixed top-4 left-4 z-50 p-3 rounded-xl glass hover:glass-strong transition-all hover:scale-105"
         aria-label="Toggle menu"
       >
         {isMobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -34,12 +35,21 @@ export const FloatingSidebar = () => {
       {/* Desktop Sidebar */}
       <nav
         className={cn(
-          "hidden md:flex fixed left-0 top-0 h-screen z-40 flex-col py-8 bg-card/60 backdrop-blur-xl border-r border-border transition-all duration-300",
-          isExpanded ? "w-60" : "w-[72px]"
+          "hidden md:flex fixed left-0 top-0 h-screen z-40 flex-col py-6 glass-strong transition-all duration-300",
+          isExpanded ? "w-64" : "w-[72px]"
         )}
         onMouseEnter={() => setIsExpanded(true)}
         onMouseLeave={() => setIsExpanded(false)}
       >
+        {/* Logo */}
+        <div className="px-4 mb-8">
+          {isExpanded ? (
+            <Logo size="sm" showText={true} />
+          ) : (
+            <Logo size="sm" showText={false} />
+          )}
+        </div>
+
         <div className="flex-1 flex flex-col gap-2 px-3">
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -52,6 +62,10 @@ export const FloatingSidebar = () => {
                 onClick={(e) => {
                   e.preventDefault();
                   setActiveItem(item.name);
+                  const element = document.querySelector(item.href);
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
                 }}
                 className={cn(
                   "flex items-center gap-4 px-4 py-3 rounded-lg transition-all duration-300 group relative",
@@ -81,11 +95,15 @@ export const FloatingSidebar = () => {
       {/* Mobile Sidebar */}
       <nav
         className={cn(
-          "md:hidden fixed inset-y-0 left-0 z-40 w-64 bg-card/95 backdrop-blur-xl border-r border-border transition-transform duration-300",
+          "md:hidden fixed inset-y-0 left-0 z-40 w-64 glass-strong transition-transform duration-300",
           isMobileOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <div className="flex flex-col gap-2 p-6 mt-20">
+        <div className="p-6 mb-4">
+          <Logo size="sm" showText={true} />
+        </div>
+        
+        <div className="flex flex-col gap-2 px-6">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeItem === item.name;
@@ -98,6 +116,10 @@ export const FloatingSidebar = () => {
                   e.preventDefault();
                   setActiveItem(item.name);
                   setIsMobileOpen(false);
+                  const element = document.querySelector(item.href);
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
                 }}
                 className={cn(
                   "flex items-center gap-4 px-4 py-3 rounded-lg transition-all duration-300",

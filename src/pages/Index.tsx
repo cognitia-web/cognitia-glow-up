@@ -38,11 +38,11 @@ const goals = [
 
 const Index = () => {
   return (
-    <div className="min-h-screen w-full relative">
+    <div className="min-h-screen w-full relative scroll-smooth">
       {/* Skip to content link for accessibility */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-lg"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-6 focus:py-3 focus:bg-primary focus:text-primary-foreground focus:rounded-lg focus:shadow-lg"
       >
         Skip to Content
       </a>
@@ -58,50 +58,79 @@ const Index = () => {
         <HeroSlideshow />
 
         {/* Goals Section */}
-        <section id="goals" className="max-w-7xl mx-auto px-6 py-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Your Active Goals
+        <section id="goals" className="max-w-7xl mx-auto px-6 py-24">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4 border border-primary/20">
+              Active Goals
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              Your Journey to Success
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
               Track your progress and achieve greatness, one goal at a time
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {goals.map((goal, index) => (
-              <GoalCard key={index} {...goal} />
+              <div
+                key={index}
+                className="animate-fade-in"
+                style={{
+                  animationDelay: `${index * 0.1}s`,
+                  animationFillMode: 'both',
+                }}
+              >
+                <GoalCard {...goal} />
+              </div>
             ))}
           </div>
         </section>
 
         {/* Analytics Section */}
-        <section id="analytics" className="max-w-7xl mx-auto px-6 py-20">
-          <div className="bg-gradient-to-br from-card to-card/50 rounded-2xl p-8 md:p-12 border border-border">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Insights & Analytics
-            </h2>
-            <p className="text-muted-foreground text-lg mb-8">
-              Beautiful visualizations and intelligent insights to keep you motivated
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="text-center p-6 bg-background/50 rounded-xl">
-                <div className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
-                  12
-                </div>
-                <div className="text-sm text-muted-foreground">Goals Completed</div>
+        <section id="analytics" className="max-w-7xl mx-auto px-6 py-24">
+          <div className="relative glass-strong rounded-3xl p-10 md:p-16 overflow-hidden">
+            {/* Background gradient orbs */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px]" />
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-[120px]" />
+            
+            <div className="relative z-10">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  Insights & Analytics
+                </h2>
+                <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+                  Beautiful visualizations and intelligent insights to keep you motivated
+                </p>
               </div>
-              <div className="text-center p-6 bg-background/50 rounded-xl">
-                <div className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
-                  4
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="text-center p-8 glass rounded-2xl hover-lift hover-scale group">
+                  <div className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform">
+                    12
+                  </div>
+                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
+                    Goals Completed
+                  </div>
                 </div>
-                <div className="text-sm text-muted-foreground">Active Goals</div>
-              </div>
-              <div className="text-center p-6 bg-background/50 rounded-xl">
-                <div className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
-                  89%
+                
+                <div className="text-center p-8 glass rounded-2xl hover-lift hover-scale group">
+                  <div className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform">
+                    4
+                  </div>
+                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
+                    Active Goals
+                  </div>
                 </div>
-                <div className="text-sm text-muted-foreground">Success Rate</div>
+                
+                <div className="text-center p-8 glass rounded-2xl hover-lift hover-scale group">
+                  <div className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform">
+                    89%
+                  </div>
+                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
+                    Success Rate
+                  </div>
+                </div>
               </div>
             </div>
           </div>

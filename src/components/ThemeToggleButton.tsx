@@ -28,15 +28,15 @@ export const ThemeToggleButton = () => {
       variant="outline"
       size="icon"
       className={cn(
-        "fixed top-6 right-6 z-50 w-12 h-12 rounded-full bg-card/80 backdrop-blur-lg border-2 border-primary/30 hover:border-primary transition-all duration-300 btn-bounce",
+        "fixed top-6 right-6 z-50 w-14 h-14 rounded-2xl glass-strong hover:scale-110 transition-all duration-300 btn-bounce group",
         isRotating && "animate-[rotate360_0.6s_ease-in-out]"
       )}
       aria-label="Toggle theme"
     >
       {isLight ? (
-        <Sun className="w-5 h-5 text-primary" />
+        <Sun className="w-6 h-6 text-primary group-hover:scale-110 transition-transform" />
       ) : (
-        <Moon className="w-5 h-5 text-primary" />
+        <Moon className="w-6 h-6 text-primary group-hover:scale-110 transition-transform" />
       )}
     </Button>
   );

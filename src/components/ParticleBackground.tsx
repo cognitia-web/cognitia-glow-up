@@ -114,7 +114,7 @@ export const ParticleBackground = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 -z-10 pointer-events-none opacity-0 animate-fade-in hidden md:block"
-      style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}
+      style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}
     />
   );
 };

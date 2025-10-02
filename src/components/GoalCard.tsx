@@ -46,7 +46,7 @@ export const GoalCard = ({ title, description, progress, details, category }: Go
   return (
     <Card
       ref={cardRef}
-      className="hover-lift cursor-pointer transition-all duration-450"
+      className="hover-lift hover-glow cursor-pointer transition-all duration-450 glass group"
       onClick={() => setIsExpanded(!isExpanded)}
       onKeyDown={handleKeyPress}
       tabIndex={0}
@@ -56,14 +56,18 @@ export const GoalCard = ({ title, description, progress, details, category }: Go
       <CardHeader>
         <div className="flex items-start justify-between">
           <div className="flex-1">
-            <div className="text-xs font-semibold text-primary mb-2">{category}</div>
-            <CardTitle className="text-xl mb-2">{title}</CardTitle>
-            <CardDescription>{description}</CardDescription>
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-3 border border-primary/20">
+              {category}
+            </div>
+            <CardTitle className="text-xl mb-2 group-hover:text-primary transition-colors">
+              {title}
+            </CardTitle>
+            <CardDescription className="leading-relaxed">{description}</CardDescription>
           </div>
           <Button
             variant="ghost"
             size="icon"
-            className="flex-shrink-0"
+            className="flex-shrink-0 hover:bg-primary/10 transition-colors"
             onClick={(e) => {
               e.stopPropagation();
               setIsExpanded(!isExpanded);
@@ -77,21 +81,24 @@ export const GoalCard = ({ title, description, progress, details, category }: Go
       <CardContent>
         {/* Progress Bar */}
         <div className="mb-4">
-          <div className="flex justify-between text-sm mb-2">
-            <span className="text-muted-foreground">Progress</span>
-            <span className="font-semibold text-primary">{progress}%</span>
+          <div className="flex justify-between text-sm mb-3">
+            <span className="text-muted-foreground font-medium">Progress</span>
+            <span className="font-bold text-primary text-base">{progress}%</span>
           </div>
-          <div className="h-3 bg-muted rounded-full overflow-hidden">
+          <div className="relative h-3 bg-muted rounded-full overflow-hidden">
             <div
               className={cn(
-                "h-full bg-gradient-to-r from-primary to-accent rounded-full transition-all duration-1000 ease-out",
+                "h-full bg-gradient-to-r from-primary via-accent to-primary rounded-full transition-all duration-1000 ease-out relative",
                 animateProgress && "animate-progress-fill"
               )}
               style={{
                 width: animateProgress ? `${progress}%` : '0%',
                 '--progress-value': `${progress}%`,
               } as React.CSSProperties}
-            />
+            >
+              {/* Shimmer effect */}
+              <div className="absolute inset-0 animate-shimmer opacity-50" />
+            </div>
           </div>
         </div>
 

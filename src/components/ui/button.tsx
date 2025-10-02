@@ -9,14 +9,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg transition-all",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 hover:shadow-lg transition-all",
+        outline: "border-2 border-input bg-background hover:bg-accent hover:text-accent-foreground hover:border-primary/50 transition-all",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:shadow-md transition-all",
+        ghost: "hover:bg-accent hover:text-accent-foreground transition-all",
         link: "text-primary underline-offset-4 hover:underline",
-        hero: "bg-gradient-to-r from-primary to-accent text-white font-semibold hover:shadow-[0_0_40px_hsl(var(--primary)/0.4)] transition-all duration-300",
-        premium: "bg-card/60 backdrop-blur-lg border-2 border-primary/30 text-foreground hover:border-primary hover:bg-card transition-all duration-300",
+        hero: "bg-gradient-to-r from-primary to-accent text-white font-semibold hover:shadow-glow hover:scale-105 transition-all duration-300",
+        premium: "glass-strong border-2 border-primary/30 text-foreground hover:border-primary hover:shadow-glow transition-all duration-300",
       },
       size: {
         default: "h-10 px-4 py-2",

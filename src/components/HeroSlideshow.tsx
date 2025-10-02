@@ -73,28 +73,38 @@ export const HeroSlideshow = () => {
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
-            <div className="relative w-full h-full flex items-center justify-center bg-gradient-to-br from-background via-background to-primary/10">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(153,118,244,0.1),transparent_50%)]" />
+            <div className="relative w-full h-full flex items-center justify-center gradient-mesh">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(153,118,244,0.15),transparent_60%)]" />
               
-              <div className="relative z-10 max-w-4xl mx-auto px-6 text-center animate-fade-in">
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-scale-in">
-                  {slide.title}
-                </h1>
+              {/* Animated gradient orbs */}
+              <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-float" style={{ animationDelay: '0s' }} />
+              <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-[120px] animate-float" style={{ animationDelay: '1s' }} />
+              
+              <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+                <div className="animate-fade-in" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>
+                  <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent leading-tight">
+                    {slide.title}
+                  </h1>
+                </div>
                 
-                <h2 className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                  {slide.subtitle}
-                </h2>
+                <div className="animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'both' }}>
+                  <h2 className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
+                    {slide.subtitle}
+                  </h2>
+                </div>
                 
-                <Button
-                  size="lg"
-                  className="group bg-gradient-to-r from-primary to-accent hover:shadow-glow transition-all duration-300 btn-bounce"
-                >
-                  {slide.cta}
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
+                <div className="animate-scale-in" style={{ animationDelay: '0.5s', animationFillMode: 'both' }}>
+                  <Button
+                    size="lg"
+                    className="group relative overflow-hidden bg-gradient-to-r from-primary to-accent hover:shadow-glow transition-all duration-300 btn-bounce btn-ripple text-lg px-8 py-6 h-auto"
+                  >
+                    {slide.cta}
+                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </div>
               </div>
               
-              <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background via-background/50 to-transparent" />
             </div>
           </SwiperSlide>
         ))}
