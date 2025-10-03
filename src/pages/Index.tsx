@@ -4,6 +4,9 @@ import { HeroSlideshow } from '@/components/HeroSlideshow';
 import { GoalCard } from '@/components/GoalCard';
 import { Footer } from '@/components/Footer';
 import { ThemeToggleButton } from '@/components/ThemeToggleButton';
+import { FloatingActionButton } from '@/components/FloatingActionButton';
+import { ScrollProgress } from '@/components/ScrollProgress';
+import { AnimatedCounter } from '@/components/AnimatedCounter';
 
 const goals = [
   {
@@ -47,9 +50,11 @@ const Index = () => {
         Skip to Content
       </a>
 
+      <ScrollProgress />
       <ParticleBackground />
       <FloatingSidebar />
       <ThemeToggleButton />
+      <FloatingActionButton />
 
       <main 
         id="main-content" 
@@ -59,8 +64,8 @@ const Index = () => {
 
         {/* Goals Section */}
         <section id="goals" className="max-w-7xl mx-auto px-6 py-24">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4 border border-primary/20">
+          <div className="text-center mb-16 animate-fade-up">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4 border border-primary/20 animate-pulse-border">
               Active Goals
             </div>
             <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -89,13 +94,13 @@ const Index = () => {
 
         {/* Analytics Section */}
         <section id="analytics" className="max-w-7xl mx-auto px-6 py-24">
-          <div className="relative glass-strong rounded-3xl p-10 md:p-16 overflow-hidden">
+          <div className="relative glass-strong rounded-3xl p-10 md:p-16 overflow-hidden animate-fade-in">
             {/* Background gradient orbs */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px]" />
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-[120px]" />
+            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] animate-float" />
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-[120px] animate-float" style={{ animationDelay: '1s' }} />
             
             <div className="relative z-10">
-              <div className="text-center mb-12">
+              <div className="text-center mb-12 animate-fade-up">
                 <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                   Insights & Analytics
                 </h2>
@@ -105,27 +110,27 @@ const Index = () => {
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="text-center p-8 glass rounded-2xl hover-lift hover-scale group">
+                <div className="text-center p-8 glass rounded-2xl hover-lift hover-scale hover-tilt group animate-slide-up" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>
                   <div className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform">
-                    12
+                    <AnimatedCounter value={12} />
                   </div>
                   <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
                     Goals Completed
                   </div>
                 </div>
                 
-                <div className="text-center p-8 glass rounded-2xl hover-lift hover-scale group">
+                <div className="text-center p-8 glass rounded-2xl hover-lift hover-scale hover-tilt group animate-slide-up" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
                   <div className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform">
-                    4
+                    <AnimatedCounter value={4} />
                   </div>
                   <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
                     Active Goals
                   </div>
                 </div>
                 
-                <div className="text-center p-8 glass rounded-2xl hover-lift hover-scale group">
+                <div className="text-center p-8 glass rounded-2xl hover-lift hover-scale hover-tilt group animate-slide-up" style={{ animationDelay: '0.3s', animationFillMode: 'both' }}>
                   <div className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform">
-                    89%
+                    <AnimatedCounter value={89} suffix="%" />
                   </div>
                   <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
                     Success Rate

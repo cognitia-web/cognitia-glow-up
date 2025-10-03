@@ -198,6 +198,26 @@ All colors MUST be HSL.
     transform: scale(1.02);
   }
   
+  .hover-tilt {
+    transition: var(--transition-smooth);
+  }
+  
+  .hover-tilt:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(2deg);
+  }
+  
+  /* Focus States for Accessibility */
+  *:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  a:focus-visible, 
+  button:focus-visible {
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.3);
+  }
+  
   /* Button Effects */
   .btn-bounce:active {
     animation: bounce 450ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -262,5 +282,14 @@ All colors MUST be HSL.
   @keyframes pulse {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.5; }
+  }
+  
+  @keyframes pulse-border {
+    0%, 100% { border-color: hsl(var(--primary) / 0.3); }
+    50% { border-color: hsl(var(--primary)); }
+  }
+  
+  .animate-pulse-border {
+    animation: pulse-border 2s ease-in-out infinite;
   }
 }
