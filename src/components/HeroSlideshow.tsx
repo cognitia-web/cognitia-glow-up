@@ -52,15 +52,18 @@ export const HeroSlideshow = () => {
   }, []);
 
   return (
-    <section className="relative w-full h-[600px] md:h-[700px]" id="home">
+    <section className="relative w-full h-[600px] md:h-[700px] overflow-hidden" id="home">
+      {/* Ambient light effects */}
+      <div className="absolute inset-0 bg-gradient-radial from-primary/10 via-transparent to-transparent animate-pulse-slow pointer-events-none" />
+      
       <Swiper
         ref={swiperRef}
         modules={[Autoplay, EffectFade, Pagination, Keyboard]}
         effect="fade"
         fadeEffect={{ crossFade: true }}
-        speed={900}
+        speed={1200}
         autoplay={{
-          delay: 5000,
+          delay: 6000,
           disableOnInteraction: false,
         }}
         pagination={{

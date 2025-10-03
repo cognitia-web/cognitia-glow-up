@@ -28,19 +28,24 @@ export const ParticleBackground = () => {
       speedX: number;
       speedY: number;
       opacity: number;
+      pulsePhase: number;
+      pulseSpeed: number;
 
       constructor(canvasWidth: number, canvasHeight: number) {
         this.x = Math.random() * canvasWidth;
         this.y = Math.random() * canvasHeight;
-        this.size = Math.random() * 3 + 1;
-        this.speedX = (Math.random() - 0.5) * 0.5;
-        this.speedY = (Math.random() - 0.5) * 0.5;
-        this.opacity = Math.random() * 0.5 + 0.2;
+        this.size = Math.random() * 4 + 1.5;
+        this.speedX = (Math.random() - 0.5) * 0.8;
+        this.speedY = (Math.random() - 0.5) * 0.8;
+        this.opacity = Math.random() * 0.6 + 0.3;
+        this.pulsePhase = Math.random() * Math.PI * 2;
+        this.pulseSpeed = Math.random() * 0.02 + 0.01;
       }
 
       update(canvasWidth: number, canvasHeight: number) {
         this.x += this.speedX;
         this.y += this.speedY;
+        this.pulsePhase += this.pulseSpeed;
 
         if (this.x > canvasWidth) this.x = 0;
         if (this.x < 0) this.x = canvasWidth;
@@ -49,9 +54,25 @@ export const ParticleBackground = () => {
       }
 
       draw(ctx: CanvasRenderingContext2D) {
-        ctx.fillStyle = `rgba(153, 118, 244, ${this.opacity})`;
+        const pulse = Math.sin(this.pulsePhase) * 0.3 + 0.7;
+        const dynamicOpacity = this.opacity * pulse;
+        const dynamicSize = this.size * pulse;
+        
+        // Outer glow
+        const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, dynamicSize * 3);
+        gradient.addColorStop(0, `rgba(153, 118, 244, ${dynamicOpacity * 0.8})`);
+        gradient.addColorStop(0.5, `rgba(153, 118, 244, ${dynamicOpacity * 0.3})`);
+        gradient.addColorStop(1, `rgba(153, 118, 244, 0)`);
+        
+        ctx.fillStyle = gradient;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, dynamicSize * 3, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Core particle
+        ctx.fillStyle = `rgba(199, 172, 255, ${dynamicOpacity})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, dynamicSize, 0, Math.PI * 2);
         ctx.fill();
       }
     }
@@ -60,7 +81,7 @@ export const ParticleBackground = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
 
-      for (let i = 0; i < particleCount; i++) {
+      for (let i = 0; i < 70; i++) {
         particles.push(new Particle(canvas.width, canvas.height));
       }
     };
@@ -73,16 +94,22 @@ export const ParticleBackground = () => {
         particle.draw(ctx);
       });
 
-      // Draw connections
+      // Draw connections with gradient
       particles.forEach((particleA, indexA) => {
         particles.slice(indexA + 1).forEach(particleB => {
           const dx = particleA.x - particleB.x;
           const dy = particleA.y - particleB.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 150) {
-            ctx.strokeStyle = `rgba(153, 118, 244, ${0.1 * (1 - distance / 150)})`;
-            ctx.lineWidth = 1;
+          if (distance < 180) {
+            const opacity = 0.15 * (1 - distance / 180);
+            const gradient = ctx.createLinearGradient(particleA.x, particleA.y, particleB.x, particleB.y);
+            gradient.addColorStop(0, `rgba(153, 118, 244, ${opacity})`);
+            gradient.addColorStop(0.5, `rgba(199, 172, 255, ${opacity * 1.2})`);
+            gradient.addColorStop(1, `rgba(153, 118, 244, ${opacity})`);
+            
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = 1.5;
             ctx.beginPath();
             ctx.moveTo(particleA.x, particleA.y);
             ctx.lineTo(particleB.x, particleB.y);

@@ -121,6 +121,10 @@ export default {
         "wiggle": {
           "0%, 100%": { transform: "rotate(-3deg)" },
           "50%": { transform: "rotate(3deg)" }
+        },
+        "spin-slow": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" }
         }
       },
       animation: {
@@ -137,7 +141,8 @@ export default {
         "glow": "glow 2s ease-in-out infinite",
         "shimmer": "shimmer 3s linear infinite",
         "bounce-in": "bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
-        "wiggle": "wiggle 1s ease-in-out infinite"
+        "wiggle": "wiggle 1s ease-in-out infinite",
+        "spin-slow": "spin-slow 3s linear infinite"
       },
     },
   },
